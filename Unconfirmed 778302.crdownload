@@ -1,0 +1,117 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[24]:
+
+
+def average_monthly_production(production_values):
+    total_production = sum(production_values)
+    average_production = total_production / len(production_values)
+    return average_production
+# Example production values for each month
+monthly_production = [ 35800,32500,4735,725,4210,855,6320,1050,18250 ]
+# Calculate and print the average monthly production
+avg_production = average_monthly_production(monthly_production)
+print(f"Average Monthly Production: {avg_production}tons")
+
+
+
+
+# In[14]:
+
+
+# Initial and improved asset utilization rates
+initial_utilization_rate = 60  
+improved_utilization_rate = 75  
+# Calculate percentage improvement
+percentage_improvement = ((improved_utilization_rate - initial_utilization_rate) / initial_utilization_rate) * 100
+# Print the result
+print(f"Asset utilization rate improved by {percentage_improvement:.2f}%")
+
+
+
+
+# In[20]:
+
+
+import random
+def simulate_mining_process():
+    # Simulating mining process with reduced maintenance needs
+    mining_equipment = {
+        "excavator": 100,
+        "drill": 90,
+        "haul_truck": 95,
+        "CAT996_Loader": 98,
+        "Komatsu_Dump_Truck": 97,
+        "backhoe": 96,
+        "scraper": 92,
+        "CAT_785C": 94,
+        "Komatsu_860E": 93,
+        "100T_Dump_Truck": 91,
+        "Excavator_300": 99,
+        "35T_Dump_Truck": 97,
+        "Shovel_1": 95,
+        "Dragline_1": 96,
+        "Drill_1": 89,
+        "Truck_1": 97,
+        "Truck_2": 96,
+        "Truck_3": 98,
+        "Truck_4": 94
+    }
+    for day in range(1, 31):  # Simulate for 30 days
+        for equipment in mining_equipment:
+            # Simulate daily wear and tear
+            mining_equipment[equipment] -= random.randint(2, 8)
+            # Check if maintenance is required
+            if mining_equipment[equipment] < 75:
+                print(f"Day {day}: {equipment.replace('_', ' ').capitalize()} requires minimal maintenance.")
+                # Perform minimal maintenance actions
+                mining_equipment[equipment] += random.randint(10, 20)
+        print("\n")
+# Run the simulation
+simulate_mining_process()
+
+
+
+
+
+
+
+# In[22]:
+
+
+import matplotlib.pyplot as plt
+# Equipment data
+equipment_list = ["Drill1a", "Truck1", "Drill1b", "Drill1c", "Drill1d", "Drill1e", "Truck1b", "Truck2", "Truck3", "Truck4", "Truck1c", "Truck1d", "Truck1e", "Truck1f"]
+mtbf_list = [300, 200, 300, 300, 300, 300, 200, 200, 200, 200, 200, 300, 300, 300]
+# Dictionary to store MTBF for each equipment
+equipment_mtbf = {}
+# Calculate and store MTBF for each equipment
+for equipment, mtbf in zip(equipment_list, mtbf_list):
+    if equipment not in equipment_mtbf:
+        equipment_mtbf[equipment] = [mtbf]
+    else:
+        equipment_mtbf[equipment].append(mtbf)
+# Calculate average MTBF for each equipment
+average_mtbf = {equipment: sum(mtbf_values) / len(mtbf_values) for equipment, mtbf_values in equipment_mtbf.items()}
+# Create a bar chart
+fig, ax = plt.subplots()
+equipment_names = list(average_mtbf.keys())
+avg_mtbf_values = list(average_mtbf.values())
+ax.bar(equipment_names, avg_mtbf_values, color='blue')
+ax.set_ylabel('Average MTBF (hrs)')
+ax.set_xlabel('Equipment')
+ax.set_title('Average MTBF for Each Equipment')
+# Display the chart
+plt.show()
+
+
+
+
+
+
+# In[ ]:
+
+
+
+
